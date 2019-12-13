@@ -1,0 +1,40 @@
+<style>
+    ul{
+        list-style: none;
+        background-color: #024A86;
+        width: 100%;
+        height: 65px;
+        text-align: center;
+        color: #FFFFFF;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-transform: uppercase;
+        height: auto;
+    }
+
+    ul li{
+        width: 200px;
+        display: inline-block;
+        padding: 20px 10px;
+    }
+
+    ul li:hover{
+        background-color: #109DFA;
+    }
+
+    ul li a{
+        padding: 20px 10px;
+    }
+
+    .cursor{
+        cursor: pointer;
+    }
+</style>
+<ul>
+    <li><a (click)="clickp()" class="cursor">population graph</a></li>
+    <li><a (click)="clickc()" class="cursor">pollution graph</a></li>
+    <li><a (click)="clickt()" class="cursor">try TOKEN!!</a></li>
+</ul>
+
+<app-graficapoblacion *ngIf="poblacionIsVisible" [infoEstados]="infoEdoPoblacion"></app-graficapoblacion>
+<app-graficacontaminacion *ngIf="contaminacionIsVisible" [InfoContaminacion]="infocontaminacion"></app-graficacontaminacion>

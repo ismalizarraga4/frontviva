@@ -1,0 +1,48 @@
+<style>
+    #content_login{
+        width: 100%;
+        margin: 20px;
+        background-color: #024A86;
+        padding: 30px 10px;
+        border-radius: 10px;
+    }
+    
+    .input_login{
+        width: 90%;
+        display: block;
+        border-radius: 10px;
+        margin: 30px 5px;
+        padding: 5px 10px;
+    }
+
+    .formulario_login{
+        text-align: center;
+    }
+
+    .btn_login{
+        margin: 15px 20px;
+        border-radius: 5px;
+        background-color: #FFFFFF;
+        font-size: 12px;
+        padding: 0px 5px;
+        width: 50%;
+    }
+
+    .text_btn_login{
+        font-size: 15px;
+        font-weight: bolder;
+        text-transform: uppercase;
+    }
+
+
+
+
+</style>
+<div id="content_login">
+    <div class="formulario_login">
+        <input class="input_login" type="text" [value]="usuario" (input)="usuario=$event.target.value" placeholder="Usuario">
+        <input class="input_login" type="password" [value]="contrasena" (input)="contrasena=$event.target.value" placeholder="contrasena">
+        <p *ngIf=falseLogin>{{mensajeFalseLogin}}</p>
+        <button class="btn_login" (click)="clickLogin()"><p class="text_btn_login">Login</p></button>
+    </div>
+</div>    

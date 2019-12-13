@@ -1,0 +1,155 @@
+<style>
+    .marcadorespoblacion{
+        display: flex;
+    }
+
+    .muestraanios{
+        width: 120px;
+        display: flex;
+        align-items: center;
+    }
+
+    .coloranio{
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .estado{
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+
+    }
+
+    .content-text-bar{
+        width: 100px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .bar-graph {
+        display: inline-block;
+        height: 30px;
+        width: 650px;
+        background: transparent;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        box-sizing: border-box;
+        font-size:0;
+        position:relative;
+    }
+
+    .bar-graph-container {
+        position:absolute;
+        left:-3px;
+        right:-3px;
+        bottom:0;
+        top:0;
+        background-color: #024A86;
+    }
+
+    .bar-graph-filling {
+        height: 30px;
+        display: inline-block;
+    }
+
+    .red {
+        background:#EF280F;
+    }
+
+    .green {
+        background: #6DC36D;
+    }
+
+    .yellow {
+        background:#E7D40A;
+    }
+
+    .info{
+        font-size: 15px;
+        margin-left: 4px;
+        color: white;
+        margin: 0;
+        padding-left: 10px;
+        text-align: center;
+    }
+
+    .cursor{
+        cursor: pointer;
+    }
+
+    .titulo-grafica{
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 900;
+    }
+</style>
+<div class="encabezadoPoblacion" *ngIf="isVisibleGraph">
+    <div class="tituloPoblacion">
+        <p class="titulo-grafica">population Graph</p> 
+    </div>
+    <div class="marcadorespoblacion">
+        <div class="muestraanios">
+            <span class="coloranio green"></span>
+            2015
+        </div>
+        <div class="muestraanios">
+            <span class="coloranio yellow"></span>
+            2016
+        </div>
+        <div class="muestraanios">
+            <span class="coloranio red"></span>
+            2017
+        </div>
+
+    </div>
+
+</div>
+<div class="contenedorPoblacion">
+    <div id="content-principal-graph" *ngIf="isVisibleGraph">
+        <div class="estado" *ngFor="let item of edoPoblaciontotal">
+            <div class="content-text-bar">
+                <span>{{item.State}}</span>
+            </div>
+            <div class="bar-graph">
+                <div class="bar-graph-container cursor" (click)="detalleEstado(item.IdState)">
+                    <!-- <span id="barraColor" class="bar-graph-filling red"></span> -->
+                    <span *ngFor="let subitem of item.data">
+                        <span class="bar-graph-filling" [ngClass]="subitem.color" [ngStyle]="subitem.percentage">
+                            <p class="info">{{subitem.population}}</p>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content-graph-detail" *ngIf="!isVisibleGraph">
+        <div class="arrow-return">
+            <img class="cursor" src="assets/imgs/flecha-hacia-atras.png" alt="" style="width:50px;" (click)="retornarGraph()">
+
+        </div>
+        <div class="estado-detalle" *ngFor="let item of edoPlobacionDetalle">
+            <div class="titulo-detalle">
+                <p class="titulo-grafica">{{item.State}}</p>
+            </div>
+            <div class="content-detalle-estado">
+                <div class="estado" *ngFor="let subitem of item.data">
+                    <div class="content-text-bar">
+                        <span>{{subitem.Year}}</span>
+                    </div>
+                    <div class="bar-graph">
+                        <div class="bar-graph-container">
+                            <!-- <span id="barraColor" class="bar-graph-filling red"></span> -->
+                            <span class="bar-graph-filling green" [ngStyle]="subitem.styleEdoPoblacion">
+                                <p class="info">{{subitem.population}}</p>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
